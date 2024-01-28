@@ -1,3 +1,4 @@
+\DocumentMetadata{testphase=phase-III}
 % $Id: template.tex 11 2007-04-03 22:25:53Z jpeltier $
 
 \documentclass{vgtc}                          % final (conference style)
@@ -64,9 +65,6 @@
 %% declare the category of your paper, only shown in review mode
 \vgtccategory{Research}
 
-%% allow for this line if you want the electronic option to work properly
-\vgtcinsertpkg
-
 %% In preprint mode you may define your own headline. If not, the default IEEE copyright message will appear in preprint mode.
 %\preprinttext{To appear in an IEEE VGTC sponsored conference.}
 
@@ -100,13 +98,17 @@
 \and Martha Stewart\thanks{e-mail: martha.stewart@marthastewart.com}\\ %
      \parbox{1.4in}{\scriptsize \centering Martha Stewart Enterprises \\ Microsoft Research}}
 
+\vgtcauthor{Roy G. Biv, Ed Grimley, Martha Stewart}
+
+%% allow for this line if you want the electronic option to work properly
+\vgtcinsertpkg
+
 %% A teaser figure can be included as follows
 \teaser{
   \centering
   \includegraphics[width=\linewidth]{CypressView}
-  \caption{In the Clouds: Vancouver from Cypress Mountain. Note that the teaser may not be wider than the abstract block.}
   \label{fig:teaser}
-}
+}{In the Clouds: Vancouver from Cypress Mountain. Note that the teaser may not be wider than the abstract block.}
 
 %% Abstract section.
 \abstract{Duis autem vel eum iriure dolor in hendrerit in vulputate
@@ -349,7 +351,7 @@ ipsum dolor sit amet.
 
 \begin{figure}[tb]
  \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
- \includegraphics[width=\columnwidth]{paper-count-w-2015-new}
+ \includegraphics[width=\columnwidth,alt={A visualization of the 1990--2015 data from \autoref{tab:vis_papers}. The image is from \cite{Isenberg:2017:VMC} and is in the public domain.}]{paper-count-w-2015-new}
  \caption{A visualization of the 1990--2015 data from \autoref{tab:vis_papers}. The image is from \cite{Isenberg:2017:VMC} and is in the public domain.}
  \label{fig:sample}
 \end{figure}
