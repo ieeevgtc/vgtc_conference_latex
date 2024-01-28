@@ -1,3 +1,8 @@
+% \DocumentMetadata command allows accessibility options for screen readers and people who are blind or have low vision.
+% It enables automatic tagging of LaTeX documents as described in https://www.latex-project.org/publications/2023-UFi-FMi-TUG-tb137fischer-tagging23.pdf.
+% This enables options like alternative texts for images, which can help many people. However, since the tagging is in a test phase,
+%it requires some workarounds to the template, which can (hopefully) be removed in future releases.
+% But a little discomfort for the authors is worth it if it makes reading more comfortable for others! 
 \DocumentMetadata{testphase=phase-III}
 % $Id: template.tex 11 2007-04-03 22:25:53Z jpeltier $
 
@@ -98,6 +103,8 @@
 \and Martha Stewart\thanks{e-mail: martha.stewart@marthastewart.com}\\ %
      \parbox{1.4in}{\scriptsize \centering Martha Stewart Enterprises \\ Microsoft Research}}
 
+\keywords{fun, profit}
+
 \vgtcauthor{Roy G. Biv, Ed Grimley, Martha Stewart}
 
 %% allow for this line if you want the electronic option to work properly
@@ -106,7 +113,7 @@
 %% A teaser figure can be included as follows
 \teaser{
   \centering
-  \includegraphics[width=\linewidth]{CypressView}
+  \includegraphics[width=\linewidth, alt={View on Vancouver from Cypress Mountain.}]{CypressView}
   \label{fig:teaser}
 }{In the Clouds: Vancouver from Cypress Mountain. Note that the teaser may not be wider than the abstract block.}
 
