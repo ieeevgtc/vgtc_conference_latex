@@ -208,7 +208,7 @@
   
   %% it is recommended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
   %% the following lines re-define the respective tags used in the \autoref calls
-  \newcommand{\tagstructureautorefname}{\PackageError{vgtc}{Do not use autoref with DocumentMetadata.}{Use regular ref.}}
+  \newcommand{\tagstructureautorefname}{\PackageError{vgtc}{Do not use autoref with DocumentMetadata. Use regular ref}{}}
   \renewcommand{\figureautorefname}{Fig.}
   \renewcommand{\tableautorefname}{Ta\-ble}
   \renewcommand{\chapterautorefname}{Chapter}
@@ -243,7 +243,7 @@
 
   %% it is recommended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
   %% the following lines re-define the respective tags used in the \autoref calls
-  \newcommand{\tagstructureautorefname}{\PackageError{vgtc}{Do not use autoref with DocumentMetadata.}{Use regular ref.}}
+  \newcommand{\tagstructureautorefname}{\PackageError{vgtc}{Do not use autoref with DocumentMetadata. Use regular ref}{}}
   \renewcommand{\figureautorefname}{Fig.}
   \renewcommand{\tableautorefname}{Ta\-ble}
   \renewcommand{\chapterautorefname}{Chapter}
