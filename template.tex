@@ -57,7 +57,6 @@
 \usepackage{cite}                      % needed to automatically sort the references
 \usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
-\usepackage{caption}
 %% We encourage the use of mathptmx for consistent usage of times font
 %% throughout the proceedings. However, if you encounter conflicts
 %% with other math-related packages, you may want to disable it.
@@ -115,7 +114,7 @@
 \teaser{
   \centering
   \includegraphics[width=\linewidth, alt={View on Vancouver from Cypress Mountain.}]{CypressView}
-  \captionlistentry{}
+  \refstepcounter{figure}
   \label{fig:teaser}
 }{In the Clouds: Vancouver from Cypress Mountain. Note that the teaser may not be wider than the abstract block.}
 

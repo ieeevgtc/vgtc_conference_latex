@@ -208,7 +208,6 @@
   
   %% it is recommended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
   %% the following lines re-define the respective tags used in the \autoref calls
-  \newcommand{\subfigureautorefname}{Fig.} % in case someone uses subfigures
   \newcommand{\tagstructureautorefname}{Fig.}
   \renewcommand{\figureautorefname}{Fig.}
   \renewcommand{\tableautorefname}{Ta\-ble}
@@ -244,7 +243,6 @@
 
   %% it is recommended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
   %% the following lines re-define the respective tags used in the \autoref calls
-  \newcommand{\subfigureautorefname}{Fig.} % in case someone uses subfigures
   \newcommand{\tagstructureautorefname}{Fig.}
   \renewcommand{\figureautorefname}{Fig.}
   \renewcommand{\tableautorefname}{Ta\-ble}
@@ -649,6 +647,7 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
     \addtolength{\abstractwidth}{-.66in}%
 	  \begin{minipage}{\abstractwidth}
     #1%
+	\\
     {\scriptsize\sffamily Figure 1: #2}%
     \setcounter{figure}{1}
 		\end{minipage}
