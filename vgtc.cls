@@ -180,16 +180,17 @@
 %\fi
 
 \newcommand{\vgtcinsertpkg}{}
+\def\vgtcauthor#1{\gdef\@vgtcauthor{#1}}
 \DeclareOption{electronic}{%
 \ifpdf%                    % if we use pdflatex
  \renewcommand{\vgtcinsertpkg}{%
-  \usepackage{hyperref}
+  \usepackage[pdftex, breaklinks, pagebackref, nesting]{hyperref}
   \usepackage{xcolor}
-  \hypersetup{pdftex,
-   pagebackref=true,
+  \makeatletter
+  \hypersetup{
    pdfpagemode=UseNone,
    pdftitle={\@title},
-   pdfauthor={\@author},
+   pdfauthor={\@vgtcauthor},
    pdfsubject={VGTC Special Issue Paper for TVCG},
    pdfkeywords={\vgtc@keywords},
    pageanchor=true,
@@ -200,32 +201,30 @@
    bookmarksopen=true,     % In the list, display highest level only
    bookmarksopenlevel=3,   % display three levels of bookmarks
    pdfpagemode=UseNone,    % show just the page
-   pdfstartview=Fit,       % defail page view is the whole page at once
+   pdfstartview=Fit,       % detail page view is the whole page at once
    pdfborder={0 0 0},      % we don't want those silly boxes for links
-   breaklinks=true,        % allow breaking links
    colorlinks=false,       % don't change coloring of links
-   nesting=true,
    linktocpage}
   
-	%% it is recomended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
+  %% it is recommended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
   %% the following lines re-define the respective tags used in the \autoref calls
-  \newcommand{\subfigureautorefname}{Fig.} % in case someone uses subfigures
+  \newcommand{\tagstructureautorefname}{\PackageError{vgtc}{Do not use autoref with DocumentMetadata. Use regular ref}{}}
   \renewcommand{\figureautorefname}{Fig.}
   \renewcommand{\tableautorefname}{Ta\-ble}
   \renewcommand{\chapterautorefname}{Chapter}
   \renewcommand{\sectionautorefname}{Sect.}
   \renewcommand{\subsectionautorefname}{Sect.}
   \renewcommand{\subsubsectionautorefname}{Sect.}
- }
+  \makeatother
+  }
 \else%                     % else we use pure latex
  \renewcommand{\vgtcinsertpkg}{%
-  \usepackage{hyperref}
+  \usepackage[dvips, pagebackref, breaklinks, nesting]{hyperref}
   \usepackage{xcolor}
-  \hypersetup{dvips,
-   pagebackref=true,
-   pdfpagemode=UseNone,
+  \makeatletter
+  \hypersetup{pdfpagemode=UseNone,
    pdftitle={\@title},
-   pdfauthor={\@author},
+   pdfauthor={\@vgtcauthor},
    pdfsubject={VGTC Special Issue Paper for TVCG},
    pdfkeywords={\vgtc@keywords},
    pageanchor=true,
@@ -236,23 +235,22 @@
    bookmarksopen=true,     % In the list, display highest level only
    bookmarksopenlevel=3,   % display three levels of bookmarks
    pdfpagemode=UseNone,    % show just the page
-   pdfstartview=Fit,       % defail page view is the whole page at once
+   pdfstartview=Fit,       % detail page view is the whole page at once
    pdfborder={0 0 0},      % we don't want those silly boxes for links
-   breaklinks=true,        % allow breaking links
    colorlinks=false,       % don't change coloring of links
-   nesting=true,
    linktocpage}
   \renewcommand{\pdfbookmark}[3][]{}
 
-	%% it is recomended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
+  %% it is recommended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
   %% the following lines re-define the respective tags used in the \autoref calls
-  \newcommand{\subfigureautorefname}{Fig.} % in case someone uses subfigures
+  \newcommand{\tagstructureautorefname}{\PackageError{vgtc}{Do not use autoref with DocumentMetadata. Use regular ref}{}}
   \renewcommand{\figureautorefname}{Fig.}
   \renewcommand{\tableautorefname}{Ta\-ble}
   \renewcommand{\chapterautorefname}{Chapter}
   \renewcommand{\sectionautorefname}{Sect.}
   \renewcommand{\subsectionautorefname}{Sect.}
   \renewcommand{\subsubsectionautorefname}{Sect.}
+  \makeatother
  }
 \fi
 }
@@ -575,7 +573,8 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
 \ifvgtc@wide\else
 %% make captionfont 8pt
  \newcommand{\captionfonts}{\scriptsize\sffamily}
-
+ \let\oldcaption=\caption
+ \renewcommand{\caption}[2][]{\captionfonts\oldcaption[#1]{\captionfonts#1 #2}}
  \def\instring#1#2{TT\fi\begingroup
    \edef\x{\endgroup\noexpand\in@{#1}{#2}}\x\ifin@}
  \long\def\@makecaption#1#2{%
@@ -641,7 +640,7 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
 {\@latex@warning{Format specification no longer required.}}
 
 \newcommand{\vgtc@teaser}{}
-  \newcommand{\teaser}[1]{%
+  \newcommand{\teaser}[2]{%
     \renewcommand{\vgtc@teaser}{%
     %\setlength{\captionmargin}{0.33in}% TI: no longer needed since the entire teaser is now limited to the width of the abstract
 	  \newlength{\abstractwidth}%
@@ -649,6 +648,9 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
     \addtolength{\abstractwidth}{-.66in}%
 	  \begin{minipage}{\abstractwidth}
     #1%
+	\\
+    {\scriptsize\sffamily Figure 1: #2}%
+    \setcounter{figure}{1}
 		\end{minipage}
 	  \setlength{\captionmargin}{0in}%
 	  }%

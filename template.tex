@@ -1,3 +1,9 @@
+% \DocumentMetadata command allows accessibility options for screen readers and people who are blind or have low vision.
+% It enables automatic tagging of LaTeX documents as described in https://www.latex-project.org/publications/2023-UFi-FMi-TUG-tb137fischer-tagging23.pdf.
+% This enables options like alternative texts for images, which can help many people. However, since the tagging is in a test phase,
+%it requires some workarounds to the template, which can (hopefully) be removed in future releases.
+% But a little discomfort for the authors is worth it if it makes reading more comfortable for others! 
+\DocumentMetadata{testphase=phase-III}
 % $Id: template.tex 11 2007-04-03 22:25:53Z jpeltier $
 
 \documentclass{vgtc}                          % final (conference style)
@@ -64,9 +70,6 @@
 %% declare the category of your paper, only shown in review mode
 \vgtccategory{Research}
 
-%% allow for this line if you want the electronic option to work properly
-\vgtcinsertpkg
-
 %% In preprint mode you may define your own headline. If not, the default IEEE copyright message will appear in preprint mode.
 %\preprinttext{To appear in an IEEE VGTC sponsored conference.}
 
@@ -100,13 +103,20 @@
 \and Martha Stewart\thanks{e-mail: martha.stewart@marthastewart.com}\\ %
      \parbox{1.4in}{\scriptsize \centering Martha Stewart Enterprises \\ Microsoft Research}}
 
+\keywords{fun, profit}
+
+\vgtcauthor{Roy G. Biv, Ed Grimley, Martha Stewart}
+
+%% allow for this line if you want the electronic option to work properly
+\vgtcinsertpkg
+
 %% A teaser figure can be included as follows
 \teaser{
   \centering
-  \includegraphics[width=\linewidth]{CypressView}
-  \caption{In the Clouds: Vancouver from Cypress Mountain. Note that the teaser may not be wider than the abstract block.}
+  \includegraphics[width=\linewidth, alt={View on Vancouver from Cypress Mountain.}]{CypressView}
+  \refstepcounter{figure}
   \label{fig:teaser}
-}
+}{In the Clouds: Vancouver from Cypress Mountain. Note that the teaser may not be wider than the abstract block.}
 
 %% Abstract section.
 \abstract{Duis autem vel eum iriure dolor in hendrerit in vulputate
@@ -166,7 +176,6 @@ This template is for papers of VGTC-sponsored conferences which are \emph{\textb
 
 \begin{itemize}
 \item If you receive compilation errors along the lines of ``\texttt{Package ifpdf Error: Name clash, \textbackslash ifpdf is already defined}'' then please add a new line ``\texttt{\textbackslash let\textbackslash ifpdf\textbackslash relax}'' right after the ``\texttt{\textbackslash documentclass[journal]\{vgtc\}}'' call. Note that your error is due to packages you use that define ``\texttt{\textbackslash ifpdf}'' which is obsolete (the result is that \texttt{\textbackslash ifpdf} is defined twice); these packages should be changed to use ifpdf package instead.
-\item The style uses the hyperref package, thus turns references into internal links. We thus recommend to make use of the ``\texttt{\textbackslash autoref\{reference\}}'' call (instead of ``\texttt{Figure\~{}\textbackslash ref\{reference\}}'' or similar) since ``\texttt{\textbackslash autoref\{reference\}}'' turns the entire reference into an internal link, not just the number. Examples: \autoref{fig:sample} and \autoref{tab:vis_papers}.
 \item The style automatically looks for image files with the correct extension (eps for regular \LaTeX; pdf, png, and jpg for pdf\LaTeX), in a set of given subfolders (figures/, pictures/, images/). It is thus sufficient to use ``\texttt{\textbackslash includegraphics\{CypressView\}}'' (instead of ``\texttt{\textbackslash includegraphics\{pictures/CypressView.jpg\}}'').
 \item For adding hyperlinks and DOIs to the list of references, you can use ``\texttt{\textbackslash bibliographystyle\{abbrv-doi-hyperref-narrow\}}'' (instead of ``\texttt{\textbackslash bibliographystyle\{abbrv\}}''). It uses the doi and url fields in a bib\TeX\ entry and turns the entire reference into a link, giving priority to the doi. The doi can be entered with or without the ``\texttt{http://dx.doi.org/}'' url part. See the examples in the bib\TeX\ file and the bibliography at the end of this template.\\[1em]
 \textbf{Note 1:} occasionally (for some \LaTeX\ distributions) this hyper-linked bib\TeX\ style may lead to \textbf{compilation errors} (``\texttt{pdfendlink ended up in different nesting level ...}'') if a reference entry is broken across two pages (due to a bug in hyperref). In this case make sure you have the latest version of the hyperref package (i.\,e., update your \LaTeX\ installation/packages) or, alternatively, revert back to ``\texttt{\textbackslash bibliographystyle\{abbrv-doi-narrow\}}'' (at the expense of removing hyperlinks from the bibliography) and try ``\texttt{\textbackslash bibliographystyle\{abbrv-doi-hyperref-narrow\}}'' again after some more editing.\\[1em]
@@ -258,7 +267,7 @@ takimata sanctus est Lorem ipsum dolor sit amet.
 
 \subsection{Lorem ipsum}
 
-Lorem ipsum dolor sit amet (see \autoref{tab:vis_papers}), consetetur sadipscing elitr, sed diam
+Lorem ipsum dolor sit amet (see Table \ref{tab:vis_papers}), consetetur sadipscing elitr, sed diam
 nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
@@ -320,7 +329,7 @@ rebum.
 
 \subsection{Mezcal Head}
 
-Lorem ipsum dolor sit amet (see \autoref{fig:sample}), consetetur sadipscing elitr, sed diam
+Lorem ipsum dolor sit amet (see Figure \ref{fig:sample}), consetetur sadipscing elitr, sed diam
 nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
@@ -349,8 +358,8 @@ ipsum dolor sit amet.
 
 \begin{figure}[tb]
  \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
- \includegraphics[width=\columnwidth]{paper-count-w-2015-new}
- \caption{A visualization of the 1990--2015 data from \autoref{tab:vis_papers}. The image is from \cite{Isenberg:2017:VMC} and is in the public domain.}
+ \includegraphics[width=\columnwidth,alt={A visualization of the 1990--2015 data from Table \ref{tab:vis_papers}. The image is from \cite{Isenberg:2017:VMC} and is in the public domain.}]{paper-count-w-2015-new}
+ \caption{A visualization of the 1990--2015 data from Table \ref{tab:vis_papers}. The image is from \cite{Isenberg:2017:VMC} and is in the public domain.}
  \label{fig:sample}
 \end{figure}
 
