@@ -1,6 +1,7 @@
 Created by Torsten Moeller (vis@cs.sfu.ca), April 6 2004
 modified by $Author: jpeltier $ $Date: 2007-04-03 16:51:34 -0700 (Tue, 03 Apr 2007) $
 modified by Tobias Isenberg, July 2016
+modified by Matt Brehmer, Feb 2024
 
 This distribution provides a document class for formatting papers
 according to the specifications for submission to conferences sponsored
@@ -8,15 +9,12 @@ by the IEEE Visualization & Graphics Technical Committee (VGTC). This
 includes:
 
 Conferences that use the 'conf' document option:
+- IEEE VIS: Visualization & Visual Analytics (Short Papers, Posters)
 - IEEE Virtual Reality
 - IEEE Symposium on 3D User Interfaces
 - Symposium on Haptic Interfaces for Virtual Environment and Teleoperator Systems
 - IEEE Symposium on Asia Pacific Visualisation
 - IEEE Symposium on Interactive Ray Tracing
-- IEEE Symposium on Visual Analytics Science and Technology
-- IEEE Symposium on Visual Analytics Science and Technology
-- IEEE Visualization Conference (Posters Only)
-- IEEE Information Visualization Conference (Posters Only)
 - IEEE Symposium on Volume Graphics
 
 It contains 11 files/directories:
