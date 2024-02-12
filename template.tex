@@ -1,7 +1,7 @@
 % $Id: template.tex 11 2007-04-03 22:25:53Z jpeltier $
 
 \documentclass{vgtc}                          % final (conference style)
-%\documentclass[review]{vgtc}                 % review
+% \documentclass[review]{vgtc}                 % review
 %\documentclass[widereview]{vgtc}             % wide-spaced review
 %\documentclass[preprint]{vgtc}               % preprint
 %\documentclass[electronic]{vgtc}             % electronic version
@@ -20,40 +20,22 @@
 %% Figures should be in CMYK or Grey scale format, otherwise, colour 
 %% shifting may occur during the printing process.
 
-%% These few lines make a distinction between latex and pdflatex calls and they
-%% bring in essential packages for graphics and font handling.
-%% Note that due to the \DeclareGraphicsExtensions{} call it is no longer necessary
-%% to provide the the path and extension of a graphics file:
-%% \includegraphics{diamondrule} is completely sufficient.
-%%
-\ifpdf%                                % if we use pdflatex
-  \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
-  \pdfcompresslevel=9                  % PDF Compression
-  \pdfoptionpdfminorversion=7          % create PDF 1.7
-  \ExecuteOptions{pdftex}
-  \usepackage{graphicx}                % allow us to embed graphics files
-  \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg} % for pdflatex we expect .pdf, .png, or .jpg files
-\else%                                 % else we use pure latex
-  \ExecuteOptions{dvips}
-  \usepackage{graphicx}                % allow us to embed graphics files
-  \DeclareGraphicsExtensions{.eps}     % for pure latex we expect eps files
-\fi%
-
-%% it is recomended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
+%% it is recomended to use ``\cref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
 \graphicspath{{figures/}{pictures/}{images/}{./}} % where to search for the images
 
-\usepackage{microtype}                 % use micro-typography (slightly more compact, better to read)
-\PassOptionsToPackage{warn}{textcomp}  % to address font issues with \textrightarrow
-\usepackage{textcomp}                  % use better special symbols
-\usepackage{mathptmx}                  % use matching math font
 \usepackage{times}                     % we use Times as the main font
 \renewcommand*\ttdefault{txtt}         % a nicer typewriter font
-\usepackage{cite}                      % needed to automatically sort the references
+
+%% Only used in the template examples. You can remove these lines.
 \usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
+\usepackage{lipsum}                    % used to generate placeholder text
+\usepackage{mwe}                       % used to generate placeholder figures
+
 %% We encourage the use of mathptmx for consistent usage of times font
 %% throughout the proceedings. However, if you encounter conflicts
 %% with other math-related packages, you may want to disable it.
+\usepackage{mathptmx}                  % use matching math font
 
 
 %% If you are submitting a paper to a conference for review with a double
@@ -109,37 +91,13 @@
 }
 
 %% Abstract section.
-\abstract{Duis autem vel eum iriure dolor in hendrerit in vulputate
-velit esse molestie consequat, vel illum dolore eu feugiat nulla
-facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
-praesent luptatum zzril delenit augue duis dolore te feugait nulla
-facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
-vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
-accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
-delenit augue duis dolore te feugait nulla facilisi.%
+\abstract{
+    \lipsum[1] % filler text. Replace with your abstract.
 } % end of abstract
 
-%% ACM Computing Classification System (CCS). 
-%% See <http://www.acm.org/about/class> for details.
-%% We recommend the 2012 system <http://www.acm.org/about/class/class/2012>
-%% For the 2012 system use the ``\CCScatTwelve'' which command takes four arguments.
-%% The 1998 system <http://www.acm.org/about/class/class/2012> is still possible
-%% For the 1998 system use the ``\CCScat'' which command takes four arguments.
-%% In both cases the last two arguments (1998) or last three (2012) can be empty.
-
-\CCScatlist{
-  \CCScatTwelve{Human-centered computing}{Visu\-al\-iza\-tion}{Visu\-al\-iza\-tion techniques}{Treemaps};
-  \CCScatTwelve{Human-centered computing}{Visu\-al\-iza\-tion}{Visualization design and evaluation methods}{}
-}
-
-%\CCScatlist{
-  %\CCScat{H.5.2}{User Interfaces}{User Interfaces}{Graphical user interfaces (GUI)}{};
-  %\CCScat{H.5.m}{Information Interfaces and Presentation}{Miscellaneous}{}{}
-%}
+%% Keywords that describe your work. Will show as 'Index Terms' in journal
+%% please capitalize first letter and insert punctuation after last keyword.
+\keywords{Radiosity, global illumination, constant time.}
 
 %% Copyright space is enabled by default as required by guidelines.
 %% It is disabled by the 'review' option or via the following command:
@@ -162,11 +120,11 @@ delenit augue duis dolore te feugait nulla facilisi.%
 %% \section{Introduction} %for journal use above \firstsection{..} instead
 This template is for papers of VGTC-sponsored conferences which are \emph{\textbf{not}} published in a special issue of TVCG.
 
-\section{Using the Style Template}
+\section{Using This Template}
 
 \begin{itemize}
 \item If you receive compilation errors along the lines of ``\texttt{Package ifpdf Error: Name clash, \textbackslash ifpdf is already defined}'' then please add a new line ``\texttt{\textbackslash let\textbackslash ifpdf\textbackslash relax}'' right after the ``\texttt{\textbackslash documentclass[journal]\{vgtc\}}'' call. Note that your error is due to packages you use that define ``\texttt{\textbackslash ifpdf}'' which is obsolete (the result is that \texttt{\textbackslash ifpdf} is defined twice); these packages should be changed to use ifpdf package instead.
-\item The style uses the hyperref package, thus turns references into internal links. We thus recommend to make use of the ``\texttt{\textbackslash autoref\{reference\}}'' call (instead of ``\texttt{Figure\~{}\textbackslash ref\{reference\}}'' or similar) since ``\texttt{\textbackslash autoref\{reference\}}'' turns the entire reference into an internal link, not just the number. Examples: \autoref{fig:sample} and \autoref{tab:vis_papers}.
+\item The style uses the hyperref package, thus turns references into internal links. We thus recommend to make use of the ``\texttt{\textbackslash cref\{reference\}}'' call (instead of ``\texttt{Figure\~{}\textbackslash ref\{reference\}}'' or similar) since ``\texttt{\textbackslash cref\{reference\}}'' turns the entire reference into an internal link, not just the number. Examples: \cref{fig:vis_papers} and \cref{tab:vis_papers}.
 \item The style automatically looks for image files with the correct extension (eps for regular \LaTeX; pdf, png, and jpg for pdf\LaTeX), in a set of given subfolders (figures/, pictures/, images/). It is thus sufficient to use ``\texttt{\textbackslash includegraphics\{CypressView\}}'' (instead of ``\texttt{\textbackslash includegraphics\{pictures/CypressView.jpg\}}'').
 \item For adding hyperlinks and DOIs to the list of references, you can use ``\texttt{\textbackslash bibliographystyle\{abbrv-doi-hyperref-narrow\}}'' (instead of ``\texttt{\textbackslash bibliographystyle\{abbrv\}}''). It uses the doi and url fields in a bib\TeX\ entry and turns the entire reference into a link, giving priority to the doi. The doi can be entered with or without the ``\texttt{http://dx.doi.org/}'' url part. See the examples in the bib\TeX\ file and the bibliography at the end of this template.\\[1em]
 \textbf{Note 1:} occasionally (for some \LaTeX\ distributions) this hyper-linked bib\TeX\ style may lead to \textbf{compilation errors} (``\texttt{pdfendlink ended up in different nesting level ...}'') if a reference entry is broken across two pages (due to a bug in hyperref). In this case make sure you have the latest version of the hyperref package (i.\,e., update your \LaTeX\ installation/packages) or, alternatively, revert back to ``\texttt{\textbackslash bibliographystyle\{abbrv-doi-narrow\}}'' (at the expense of removing hyperlinks from the bibliography) and try ``\texttt{\textbackslash bibliographystyle\{abbrv-doi-hyperref-narrow\}}'' again after some more editing.\\[1em]
@@ -215,6 +173,21 @@ DVI-based processes to compile the template apparently cannot handle the differe
 \item when citing references, do not use the reference as a sentence object; e.\,g., wrong: ``In \cite{Lorensen:1987:MCA} the authors describe \dots'', correct: ``Lorensen and Cline \cite{Lorensen:1987:MCA} describe \dots''
 \end{itemize}
 
+\section{Supplemental Material Instructions}
+\label{sec:supplement_inst}
+
+In support of transparent research practices and long-term open science goals, you are encouraged to make your supplemental materials available on a publicly-accessible repository.
+Please describe the available supplemental materials in the \hyperref[sec:supplemental_materials]{Supplemental Materials} section.
+These details could include (1) what materials are available, (2) where they are hosted, and (3) any necessary omissions.
+
+\section{Figure Credits}
+\label{sec:figure_credits_inst}
+
+In the \hyperref[sec:figure_credits]{Figure Credits} section at the end of the paper, you should credit the original sources of any figures that were reproduced or modified.
+Include any license details necessary, as well as links to the original materials whenever possible.
+For credits to figures from academic papers, include a citation that is listed in the \textbf{References} section.
+An example is provided \hyperref[sec:figure_credits]{below}.
+
 \section{Example Section}
 
 Lorem\marginpar{\small You can use the margins for comments while editing the submission, but please remove the marginpar comments for submission.} ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -246,19 +219,9 @@ aliquam erat volutpat~\cite{Kindlmann:1999:SAG}.
 \sum_{j=1}^{z} j = \frac{z(z+1)}{2}
 \end{equation}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-takimata sanctus est Lorem ipsum dolor sit amet.
-
 \subsection{Lorem ipsum}
 
-Lorem ipsum dolor sit amet (see \autoref{tab:vis_papers}), consetetur sadipscing elitr, sed diam
+Lorem ipsum dolor sit amet (see \cref{tab:vis_papers}), consetetur sadipscing elitr, sed diam
 nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
@@ -318,9 +281,9 @@ rebum.
   \end{tabu}%
 \end{table}
 
-\subsection{Mezcal Head}
+\subsection{Filler Subsection to Flush Out the Paper}
 
-Lorem ipsum dolor sit amet (see \autoref{fig:sample}), consetetur sadipscing elitr, sed diam
+Lorem ipsum dolor sit amet (see \cref{fig:vis_papers}), consetetur sadipscing elitr, sed diam
 nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
@@ -330,31 +293,18 @@ dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
 et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
 takimata sanctus est Lorem ipsum dolor sit amet. 
 
-\subsubsection{Duis Autem}
+\subsubsection{Filler Subsubsection to Flush Out the Paper}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est. Lorem
-ipsum dolor sit amet.
+\lipsum[1-2]% Just add some more arbitrary text so we see a fuller paper example
 
 \begin{figure}[tb]
  \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
- \includegraphics[width=\columnwidth]{paper-count-w-2015-new}
- \caption{A visualization of the 1990--2015 data from \autoref{tab:vis_papers}. The image is from \cite{Isenberg:2017:VMC} and is in the public domain.}
- \label{fig:sample}
+ \includegraphics[width=\columnwidth]{paper-count-2016}
+ \caption{A visualization of the 1990--2016 data from \cref{tab:vis_papers}, recreated based on Fig.\ 1 from \cite{Isenberg:2017:VMC} and is in the public domain.}
+ \label{fig:vis_papers}
 \end{figure}
 
-\subsubsection{Ejector Seat Reservation}
+\subsubsection{Filler Subsubsection to Flush Out the Paper}
 
 Duis autem~\cite{Lorensen:1987:MCA}\footnote{The algorithm behind
 Marching Cubes \cite{Lorensen:1987:MCA} had already been
@@ -369,7 +319,7 @@ consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
 ut laoreet dolore magna aliquam erat volutpat.
 
 
-\paragraph{Confirmed Ejector Seat Reservation}
+\paragraph{Filler Paragraph to Flush Out the Paper}
 
 Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
 suscipit lobortis nisl ut aliquip ex ea commodo
@@ -379,29 +329,31 @@ eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
 dignissim qui blandit praesent luptatum zzril delenit augue duis
 dolore te feugait nulla facilisi.
 
-\paragraph{Rejected Ejector Seat Reservation}
-
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
-vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-
 
 \section{Conclusion}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum.
+\lipsum[1]%
 
+\section*{Supplemental Materials}
+\label{sec:supplemental_materials}
+
+Refer to the instructions for this section (\cref{sec:supplement_inst}).
+Below is an example you can follow that includes the actual supplemental material for this template:
+
+All supplemental materials are available on OSF at \url{https://doi.org/10.17605/OSF.IO/2NBSG}, released under a CC BY 4.0 license.
+In particular, they include (1) Excel files containing the data for and analyses for creating \cref{tab:vis_papers} and \cref{fig:vis_papers}, (2) figure images in multiple formats, and (3) a full version of this paper with all appendices.
+Our other code is intellectual property of a corporation---Starbucks Research---and there is no feasible way to share it publicly.
+
+
+\section*{Figure Credits}
+\label{sec:figure_credits}
+
+Refer to the instructions for this section (\cref{sec:figure_credits_inst}).
+Here are the actual figure credits for this template:
+
+\Cref{fig:teaser} image credit: Scott Miller / Special to the Vancouver Sun, January 22, 2009, page A6.
+
+\Cref{fig:vis_papers} is a partial recreation of Fig.\ 1 from \cite{Isenberg:2017:VMC}, which is in the public domain.
 
 %% if specified like this the section will be committed in review mode
 \acknowledgments{
