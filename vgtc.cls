@@ -3,6 +3,8 @@
 % OF THE VGTC PUBLICATIONS CHAIR (submissions@vgtc.org).
 %
 % Changelog:
+% - modifications by Julián Méndez on 2024/05/03 
+%   - added `mathtools` package to enable math notations without dependency order errors
 % - modifications by Matthew Brehmer on 2024/02/12
 %   - ACM CCS keywords replaced with index terms, so as to be consistent with full papers
 %   - added cleveref package and instructions for use, rather than using autoref (mirrorring full paper template)
@@ -15,7 +17,6 @@
 %     - added blue hyperlink coloring, now that electronic has long been the default.
 %     - removed sample.pdf & sample.eps.
 %     - removed Google Scholar fields from template.bib.
-
 % - modifications by Cagatay Turkay and Soumya Dutta on 2019/09/11
 %   - modified the preprint article style to contain the IEEE copyright notices to produce IEEE compliant OA preprints.
 %   - included two different statements for journal and conference papers
@@ -248,6 +249,7 @@
   %% then customize how sections and tables are referenced. Note that both ``\crefname``
   %% AND ``\Crefname`` must be specified for each, otherwise cleveref uses whatever is
   %% given for both cases.
+  \RequirePackage{mathtools}
   \RequirePackage[nameinlink,capitalise]{cleveref}
   \crefname{table}{Tab.}{Tabs.}
   \Crefname{table}{Table}{Tables}
