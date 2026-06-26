@@ -3,6 +3,8 @@
 % OF THE VGTC PUBLICATIONS CHAIR (submissions@vgtc.org).
 %
 % Changelog:
+% - modifications by Dominik Moritz on 2026/06/26
+%   - Spell out reference names.
 % - modifications by Matthew Brehmer on 2024/02/12
 %   - ACM CCS keywords replaced with index terms, so as to be consistent with full papers
 %   - added cleveref package and instructions for use, rather than using autoref (mirrorring full paper template)
@@ -248,8 +250,12 @@
   %% AND ``\Crefname`` must be specified for each, otherwise cleveref uses whatever is
   %% given for both cases.
   \RequirePackage[nameinlink,capitalise]{cleveref}
+  \crefname{figure}{Fig.}{Figs.}
+  \Crefname{figure}{Figure}{Figures}
   \crefname{table}{Tab.}{Tabs.}
   \Crefname{table}{Table}{Tables}
+  \crefname{equation}{Eq.}{Eqs.}
+  \Crefname{equation}{Equation}{Equations}
   \crefname{section}{Sec.}{Secs.}
   \Crefname{section}{Section}{Sections}
 
@@ -391,8 +397,6 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
 \newcommand{\ifreviewelse}[2]{\ifvgtc@review #1 \else #2 \fi}
 
 \ifvgtcjournal
-\renewcommand{\figurename}{Fig.}
-
 \setlength{\textheight}{9.625in}
 \setlength{\topmargin}{-0.625in}
 \setlength{\headheight}{0.0625in}
