@@ -127,12 +127,25 @@
 
 \RequirePackage{ifpdf}%
 
+\IfPackageLoadedTF{tagpdf}{%
+  \ifXeTeX % XeLaTeX
+    \errmessage{Only compilation with pdfLaTeX and LuaLaTeX is allowed when PDF tagging is enabled.}%
+    \stop
+  \fi
+}{%
+}
+
 %% These few lines make a distinction between latex and pdflatex calls and they
 %% bring in essential packages for graphics and font handling.
-\ifpdf%                                % if we use pdflatex
-  \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
-  \pdfcompresslevel=9                  % PDF Compression
-  \pdfoptionpdfminorversion=7          % create PDF 1.7
+\ifpdf%
+  \ifLuaTeX % XeLaTeX and LuaLaTeX
+    \RequirePackage[base]{babel}                % allow us to embed graphics files
+    \pdfvariable minorversion=7
+  \else
+    \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
+    \pdfcompresslevel=9                  % PDF Compression
+    \pdfoptionpdfminorversion=7          % create PDF 1.7
+  \fi
   \ExecuteOptions{pdftex}
   \RequirePackage{graphicx}                % allow us to embed graphics files
   \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg} % for pdflatex we expect .pdf, .png, or .jpg files
@@ -217,10 +230,6 @@
 
   \hypersetup{
    pdfpagemode=UseNone,
-   pdftitle={\@title},
-   pdfauthor={\@author},
-   pdfsubject={VGTC Conference Paper},
-   pdfkeywords={\vgtc@keywords},
    pageanchor=true,
    plainpages=false,       % for problems with page referencing
    hypertexnames=false,    % for handling subfigures correctly
@@ -230,19 +239,27 @@
    pdfpagemode=UseNone,    % show just the page
    pdfstartview=Fit,       % defail page view is the whole page at once
    pdfborder={0 0 0},      % we don't want those silly boxes for links
-   breaklinks=true,        % allow breaking links
    colorlinks=true,        % color all links blue
    linkcolor=NavyBlue,
    urlcolor=NavyBlue,
    citecolor=NavyBlue,
-   anchorcolor=black,      % changing this colors te teaser caption using dvips
-   nesting=true,
    linktocpage,
    pdfdisplaydoctitle}
    \ifpdf%                    % if we use pdflatex
    \else%                     % else we use pure latex
     \renewcommand{\pdfbookmark}[3][]{}
    \fi
+
+   \IfPackageLoadedTF{tagpdf}{%
+      \ifLuaTeX % LuaLaTeX does not support some hypersetup parameters
+      \fi
+      }{%
+      \hypersetup{
+        breaklinks=true,        % allow breaking links
+        nesting=true,           % allow nesting of links
+        anchorcolor=black,      % changing this colors the teaser caption using dvips
+      }
+}
 
      %% it is recommended to use ``\cref{sec:bla}`` instead of ``Sec.~\ref{sec:bla}''
   %% the following lines load cleveref for consistent, style-dependent cross-references
@@ -341,6 +358,13 @@
 % ------------ package loading --------------
 
 \LoadClass{article}
+
+\IfPackageLoadedTF{tagpdf}{%
+  \ifLuaTeX % LuaLaTeX
+    \RequirePackage{unicode-math}
+  \fi
+  }{%
+}
 
 % ------------ main code --------------
 \newcommand{\vgtc@onlineid}{}
@@ -646,14 +670,23 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
 \RequirePackage{etoolbox}
 
 \newcommand{\vgtc@teaser}{}
-  \newcommand{\teaser}[1]{%
+  \newcommand{\teaser}[2]{%
     \renewcommand{\vgtc@teaser}{%
     %\setlength{\captionmargin}{0.33in}% TI: no longer needed since the entire teaser is now limited to the width of the abstract
 	  \newlength{\abstractwidth}%
 	  \setlength{\abstractwidth}{\linewidth}%
     \addtolength{\abstractwidth}{-.66in}%
 	  \begin{minipage}{\abstractwidth}
-    #1%
+      #1%
+      
+      \ifXeTeX
+        \par\vspace{0.85\baselineskip}%
+        \refstepcounter{figure}%
+        {\scriptsize\sffamily Figure~\thefigure: #2\par}%
+      \else
+        \caption{#2}
+      \fi
+      \label{fig:teaser}
 		\end{minipage}
 	  \setlength{\captionmargin}{0in}%
 	  }%
@@ -974,6 +1007,19 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
            \vspace*{\fill}
        \end{center}%
    \end{titlepage}%
+}
+
+\newcommand{\shortautor}[1]{
+  \gdef\@shortauthor{#1}
+}
+
+\newcommand{\setmetadata}{
+  \hypersetup{
+   pdftitle={\@title},
+   pdfauthor={\@shortauthor},
+   pdfsubject={VGTC Conference Paper},
+   pdfkeywords={\vgtc@keywords},
+  }
 }
 
 \AtEndDocument{\ifvgtc@cover \vgtc@coverpage \fi}

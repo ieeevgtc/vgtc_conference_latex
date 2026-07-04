@@ -1,3 +1,8 @@
+%% Uncomment the following line to enable PDF tagging (for accessibility and other purposes).
+%% This requires the tagpdf package and compilation with pdfLaTeX or LuaLaTeX.
+%%Note that this is an experimental feature and may not work with all packages.
+%\DocumentMetadata{lang=en, pdfversion=1.7, tagging=on}
+
 % $Id: template.tex 11 2007-04-03 22:25:53Z jpeltier $
 
 \documentclass{vgtc}                          % final (conference style)
@@ -81,13 +86,13 @@
 \and Martha Stewart\thanks{e-mail: martha.stewart@marthastewart.com}\\ %
      \parbox{1.4in}{\scriptsize \centering Martha Stewart Enterprises \\ Microsoft Research}}
 
-%% A teaser figure can be included as follows
+\shortautor{Roy G. Biv, Ed Grimley, and Martha Stewart}
+
+%% A teaser figure can be included as follows. The label for referencing is fig:teaser.
 \teaser{
   \centering
   \includegraphics[width=\linewidth, alt={A view of clouds with orange sunrays shining through from behind.}]{clouds}
-  \caption{Dramatic evening clouds.}
-  \label{fig:teaser}
-}
+}{Dramatic evening clouds.}
 
 %% Abstract section.
 \abstract{
@@ -101,6 +106,8 @@
 %% Copyright space is enabled by default as required by guidelines.
 %% It is disabled by the 'review' option or via the following command:
 % \nocopyrightspace
+
+\setmetadata
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
