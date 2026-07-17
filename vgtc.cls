@@ -109,7 +109,7 @@
 
 % ------------ identification --------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{vgtc}[2006/05/21 IEEE VGTC]
+\ProvidesClass{vgtc}[2026/07/17 IEEE VGTC]
 
 % ------------ initial code --------------
 
