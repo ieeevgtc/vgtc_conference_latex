@@ -129,10 +129,15 @@
 
 %% These few lines make a distinction between latex and pdflatex calls and they
 %% bring in essential packages for graphics and font handling.
-\ifpdf%                                % if we use pdflatex
-  \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
-  \pdfcompresslevel=9                  % PDF Compression
-  \pdfoptionpdfminorversion=7          % create PDF 1.7
+\ifpdf%
+  \ifLuaTeX % XeLaTeX and LuaLaTeX
+    \RequirePackage[base]{babel}                % allow us to embed graphics files
+    \pdfvariable minorversion=7
+  \else
+    \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
+    \pdfcompresslevel=9                  % PDF Compression
+    \pdfoptionpdfminorversion=7          % create PDF 1.7
+  \fi
   \ExecuteOptions{pdftex}
   \RequirePackage{graphicx}                % allow us to embed graphics files
   \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg} % for pdflatex we expect .pdf, .png, or .jpg files
@@ -646,14 +651,23 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
 \RequirePackage{etoolbox}
 
 \newcommand{\vgtc@teaser}{}
-  \newcommand{\teaser}[1]{%
+  \newcommand{\teaser}[2]{%
     \renewcommand{\vgtc@teaser}{%
     %\setlength{\captionmargin}{0.33in}% TI: no longer needed since the entire teaser is now limited to the width of the abstract
 	  \newlength{\abstractwidth}%
 	  \setlength{\abstractwidth}{\linewidth}%
     \addtolength{\abstractwidth}{-.66in}%
 	  \begin{minipage}{\abstractwidth}
-    #1%
+      #1%
+      
+      \ifXeTeX
+        \par\vspace{0.85\baselineskip}%
+        \refstepcounter{figure}%
+        {\scriptsize\sffamily Figure~\thefigure: #2\par}%
+      \else
+        \caption{#2}
+      \fi
+      \label{fig:teaser}
 		\end{minipage}
 	  \setlength{\captionmargin}{0in}%
 	  }%
