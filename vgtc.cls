@@ -663,19 +663,17 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
 \newcommand{\vgtc@keywords}{}
 \newcommand{\keywords}[1]{\renewcommand{\vgtc@keywords}{#1}}
 
-%% Plain-text author list for the PDF metadata. It is left out in review mode.
+%% Plain-text author list for the PDF metadata. It is hidden in review mode.
 \newcommand{\vgtc@shortauthor}{}
 \newcommand{\shortauthor}[1]{\renewcommand{\vgtc@shortauthor}{#1}}
 
-%% Title, author, and keywords are only known after the preamble.
-\AtBeginDocument{%
+%% Title, author, and keywords are only known at the end of the preamble.
+\AtEndPreamble{%
   \hypersetup{
     pdftitle={\@title},
+    pdfauthor={\ifvgtc@review anonymous authors\else\vgtc@shortauthor\fi},
     pdfsubject={VGTC Conference Paper},
-    pdfkeywords={\vgtc@keywords}}%
-  \ifvgtc@review\else
-    \hypersetup{pdfauthor={\vgtc@shortauthor}}%
-  \fi}
+    pdfkeywords={\vgtc@keywords}}}
 
 \newcommand{\vgtc@indexterms}{}
 \newcommand{\CCScatlist}[1]{\renewcommand{\vgtc@indexterms}{#1}}
