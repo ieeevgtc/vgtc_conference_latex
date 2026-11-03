@@ -663,6 +663,20 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
 \newcommand{\vgtc@keywords}{}
 \newcommand{\keywords}[1]{\renewcommand{\vgtc@keywords}{#1}}
 
+%% Plain-text author list for the PDF metadata. It is left out in review mode.
+\newcommand{\vgtc@shortauthor}{}
+\newcommand{\shortauthor}[1]{\renewcommand{\vgtc@shortauthor}{#1}}
+
+%% Title, author, and keywords are only known after the preamble.
+\AtBeginDocument{%
+  \hypersetup{
+    pdftitle={\@title},
+    pdfsubject={VGTC Conference Paper},
+    pdfkeywords={\vgtc@keywords}}%
+  \ifvgtc@review\else
+    \hypersetup{pdfauthor={\vgtc@shortauthor}}%
+  \fi}
+
 \newcommand{\vgtc@indexterms}{}
 \newcommand{\CCScatlist}[1]{\renewcommand{\vgtc@indexterms}{#1}}
 
@@ -970,19 +984,6 @@ Manuscript received xx xxx. 201x; accepted xx xxx. 201x. Date of Publication xx 
            \vspace*{\fill}
        \end{center}%
    \end{titlepage}%
-}
-
-\newcommand{\shortautor}[1]{
-  \gdef\@shortauthor{#1}
-}
-
-\newcommand{\setmetadata}{
-  \hypersetup{
-   pdftitle={\@title},
-   pdfauthor={\@shortauthor},
-   pdfsubject={VGTC Conference Paper},
-   pdfkeywords={\vgtc@keywords},
-  }
 }
 
 \AtEndDocument{\ifvgtc@cover \vgtc@coverpage \fi}
