@@ -3,6 +3,12 @@
 % OF THE VGTC PUBLICATIONS CHAIR (submissions@vgtc.org).
 %
 % Changelog:
+% - modifications on 2026/11/08
+%   - PDF title, author, subject, and keywords are now set automatically; added
+%     \shortauthor for the plain-text author list, which is replaced by
+%     "anonymous authors" in review mode (novacto3, Dominik Moritz)
+%   - added the cite package to template.tex to sort and merge multiple
+%     citations (Christian Krauter)
 % - modifications by Dominik Moritz on 2026/06/26
 %   - Spell out reference names.
 % - modifications by Matthew Brehmer on 2024/02/12
@@ -109,7 +115,7 @@
 
 % ------------ identification --------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{vgtc}[2026/07/17 IEEE VGTC]
+\ProvidesClass{vgtc}[2026/11/08 IEEE VGTC]
 
 % ------------ initial code --------------
 
